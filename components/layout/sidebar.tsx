@@ -99,7 +99,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         id="sidebar"
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-72 border-r bg-card px-3 py-4 shadow-sm transition-transform duration-300 md:relative md:z-0 md:translate-x-0",
+          "fixed inset-y-0 left-0 z-50 w-72 border-r bg-card px-3 py-4 shadow-sm transition-transform duration-300 md:relative md:z-0 md:translate-x-0 fade-in",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >

@@ -80,3 +80,13 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* 可以添加到 globals.css 或相关组件中 */
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
