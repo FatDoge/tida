@@ -14,6 +14,7 @@ interface I18nContextType {
   setLanguage: (language: Language) => Promise<void>;
   t: (key: TranslationKey, params?: Record<string, any>) => string;
   availableLanguages: { code: Language; name: string }[];
+  isLoaded: boolean; // 新增加载状态
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
@@ -28,21 +29,37 @@ const availableLanguages = [
   { code: 'zh' as Language, name: '中文' },
 ];
 
+// 尝试从localStorage获取初始语言
+function getInitialLanguage(): Language {
+  if (typeof window !== 'undefined') {
+    const savedLanguage = localStorage.getItem('taskflow-language') as Language;
+    if (savedLanguage && availableLanguages.some(lang => lang.code === savedLanguage)) {
+      return savedLanguage;
+    }
+  }
+  return 'en'; // 默认英文
+}
+
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>('en');
+  // 使用函数获取初始语言
+  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
+  const [isLoaded, setIsLoaded] = useState(false);
   const { user } = useAuth();
   
   useEffect(() => {
-    // Initialize language from localStorage or browser preference
-    const savedLanguage = localStorage.getItem('taskflow-language') as Language;
+    // 只处理浏览器语言首选项，因为localStorage已经在初始状态处理了
     const browserLanguage = navigator.language.split('-')[0] as Language;
     
-    if (savedLanguage && availableLanguages.some(lang => lang.code === savedLanguage)) {
-      setLanguageState(savedLanguage);
-    } else if (browserLanguage && availableLanguages.some(lang => lang.code === browserLanguage)) {
+    // 如果没有localStorage中的语言设置，但有匹配的浏览器语言设置
+    if (!localStorage.getItem('taskflow-language') && 
+        browserLanguage && 
+        availableLanguages.some(lang => lang.code === browserLanguage)) {
       setLanguageState(browserLanguage);
       localStorage.setItem('taskflow-language', browserLanguage);
     }
+    
+    // 标记语言已加载完成
+    setIsLoaded(true);
   }, []);
   
   const setLanguage = async (newLanguage: Language) => {
@@ -79,6 +96,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
     setLanguage,
     t,
     availableLanguages,
+    isLoaded, // 提供加载状态
   };
   
   return <I18nContext.Provider value={value}>{children}</I18nContext.Provider>;

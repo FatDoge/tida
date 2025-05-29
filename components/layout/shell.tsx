@@ -6,6 +6,7 @@ import Sidebar from '@/components/layout/sidebar';
 import Header from '@/components/layout/header';
 import { cn } from '@/lib/utils';
 import { useAuth } from '@/providers/auth-provider';
+import { useI18n } from '@/providers/i18n-provider';
 import { Skeleton } from '@/components/ui/skeleton';
 
 interface ShellProps {
@@ -15,7 +16,11 @@ interface ShellProps {
 export default function Shell({ children }: ShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const { user, loading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const { isLoaded: i18nLoaded } = useI18n();
+  
+  // 组合加载状态
+  const loading = authLoading || !i18nLoaded;
   
   // Close sidebar when path changes (mobile navigation)
   useEffect(() => {
@@ -71,7 +76,15 @@ export default function Shell({ children }: ShellProps) {
           "scrollbar-thin scrollbar-thumb-secondary scrollbar-track-secondary/40"
         )}>
           <div className="mx-auto max-w-7xl">
-            {children}
+            {loading ? (
+              <div className="space-y-4">
+                <Skeleton className="h-8 w-48" />
+                <Skeleton className="h-32 w-full" />
+                <Skeleton className="h-32 w-full" />
+              </div>
+            ) : (
+              <div className="fade-in">{children}</div>
+            )}
           </div>
         </main>
       </div>
