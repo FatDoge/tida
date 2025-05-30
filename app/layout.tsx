@@ -36,8 +36,9 @@ export default function RootLayout({
             <I18nProvider>
               <TasksProvider>
                 {children}
-                <SonnerToaster />
+                {/* 页脚组件将在各页面内部控制显示，而不是在根布局中 */}
                 <Toaster />
+                <SonnerToaster position="bottom-right" />
               </TasksProvider>
             </I18nProvider>
           </AuthProvider>
