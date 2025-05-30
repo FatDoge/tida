@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useAuth } from '@/providers/auth-provider';
-import { supabase } from '@/lib/supabase';
 import enTranslations from '@/locales/en.json';
 import zhTranslations from '@/locales/zh.json';
 
@@ -65,18 +64,6 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
   const setLanguage = async (newLanguage: Language) => {
     setLanguageState(newLanguage);
     localStorage.setItem('taskflow-language', newLanguage);
-    
-    // Update user preference in Supabase if logged in
-    if (user) {
-      try {
-        await supabase
-          .from('profiles')
-          .update({ language: newLanguage })
-          .eq('id', user.id);
-      } catch (error) {
-        console.error('Error updating language preference:', error);
-      }
-    }
   };
   
   const t = (key: TranslationKey, params?: Record<string, any>): string => {

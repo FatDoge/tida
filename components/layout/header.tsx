@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Menu, Bell, Moon, Sun, User, LogOut, LogIn, Languages } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { Button } from '@/components/ui/button';
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useRouter } from 'next/navigation';
 import {
   DropdownMenu,
@@ -84,6 +84,7 @@ export default function Header({ onMenuClick, user }: HeaderProps) {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
               <Avatar className="h-8 w-8">
+                <AvatarImage src={user?.user_metadata?.avatar_url || ''} />
                 <AvatarFallback>
                   {user?.user_metadata?.full_name?.charAt(0).toUpperCase() || 'U'}
                 </AvatarFallback>

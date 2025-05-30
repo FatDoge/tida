@@ -26,7 +26,6 @@ export default function SettingsForm() {
   const { toast } = useToast();
   
   const [fullName, setFullName] = useState(user?.user_metadata?.full_name || '');
-  const [enableNotifications, setEnableNotifications] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [mounted, setMounted] = useState(false);
   
@@ -36,15 +35,6 @@ export default function SettingsForm() {
     setIsLoading(true);
     
     try {
-      const { error } = await supabase
-        .from('profiles')
-        .update({
-          full_name: fullName,
-        })
-        .eq('id', user.id);
-      
-      if (error) throw error;
-      
       await supabase.auth.updateUser({
         data: { full_name: fullName }
       });
