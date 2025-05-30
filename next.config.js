@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
+  // 移除或注释掉 output: 'export' 行
+  // output: 'export',
   eslint: {
     ignoreDuringBuilds: true,
   },
