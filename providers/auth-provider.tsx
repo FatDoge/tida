@@ -64,11 +64,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const signOut = async () => {
     const { error } = await supabase.auth.signOut();
-    // 即使出现会话不存在的错误，也强制清除本地状态并重定向
-    if (!error || error.message.includes('session_not_found')) {
-      setUser(null);
-      router.push('/auth/login');
-    }
+    // 无论是否有错误，都重置用户状态并重定向
+    setUser(null);
+    router.push('/auth/login');
     return { error };
   };
 
