@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Github } from 'lucide-react';
+import { Github, Triangle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Button } from '@/components/ui/button';
 import {
@@ -111,7 +111,7 @@ export default function SignupPage() {
     <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
       <div className="mx-auto w-full max-w-md space-y-6">
         <div className="flex flex-col items-center space-y-2 text-center">
-          <CheckCircleIcon className="h-12 w-12 text-primary" />
+          <Triangle className="h-12 w-12 text-primary" />
           <h1 className="text-3xl font-bold">{t('sign_up')}</h1>
           <p className="text-muted-foreground">
             {t('welcome')}
@@ -217,25 +217,5 @@ export default function SignupPage() {
         </div>
       </div>
     </div>
-  );
-}
-
-function CheckCircleIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-      <polyline points="22 4 12 14.01 9 11.01" />
-    </svg>
   );
 }
