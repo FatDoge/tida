@@ -5,7 +5,6 @@ import { Trophy, Flame, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
 import { useI18n } from '@/providers/i18n-provider';
 import { useTasks } from '@/providers/tasks-provider';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
 import { isOverdue, isDueToday } from '@/lib/utils';
 
 export default function Achievements() {
@@ -302,7 +301,6 @@ function AchievementCard({
             <div className="text-3xl font-bold">{value}</div>
             <div className="text-sm font-medium text-muted-foreground">{level}</div>
           </div>
-          <Progress value={progress} className="h-2" />
           <div className="flex items-center justify-between text-xs">
             <span>{description}</span>
             <span>{t('achievement_progress')}: {progress}% ({t('next')}: {nextThreshold})</span>
