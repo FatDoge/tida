@@ -99,7 +99,11 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         id="sidebar"
         className={cn(
-          "fixed inset-y-0 left-0 z-50 w-72 border-r bg-card px-3 py-4 shadow-sm transition-transform duration-300 md:relative md:z-0 md:translate-x-0 fade-in",
+          "fixed inset-y-0 left-0 z-50 w-72 border-r bg-card px-3 py-4 shadow-sm md:relative md:z-0",
+          // 只在移动端应用过渡动画，桌面端保持稳定
+          "md:translate-x-0 md:transition-none",
+          // 移动端的过渡效果
+          "transition-transform duration-300",
           isOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >

@@ -22,9 +22,32 @@ export default function Shell({ children }: ShellProps) {
   // 组合加载状态
   const loading = authLoading || !i18nLoaded;
   
-  // Close sidebar when path changes (mobile navigation)
+  // 只在移动端视图下关闭侧边栏
   useEffect(() => {
-    setSidebarOpen(false);
+    const handleResize = () => {
+      const isMobile = window.innerWidth < 768; // 768px 是 md 断点
+      if (isMobile) {
+        setSidebarOpen(false);
+      }
+    };
+    
+    // 初始检查
+    handleResize();
+    
+    // 路径变化时检查
+    const checkMobile = () => {
+      const isMobile = window.innerWidth < 768;
+      if (isMobile) {
+        setSidebarOpen(false);
+      }
+    };
+    checkMobile();
+    
+    // 监听窗口大小变化
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [pathname]);
   
   // Don't render the shell for auth pages
@@ -83,7 +106,10 @@ export default function Shell({ children }: ShellProps) {
                 <Skeleton className="h-32 w-full" />
               </div>
             ) : (
-              <div className="fade-in">{children}</div>
+              // 只对主内容应用淡入效果，而不是整个布局
+              <div className="content-container">
+                <div className="fade-in">{children}</div>
+              </div>
             )}
           </div>
         </main>

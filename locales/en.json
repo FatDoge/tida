@@ -112,5 +112,7 @@
   "view_all_tasks": "View all tasks",
   "tasks_in_category": "{count} tasks",
   "no_new_notifications": "No new notifications",
-  "color": "Color"
+  "color": "Color",
+  "processing_login": "Processing login...",
+  "completing_authentication": "Please wait while we complete the authentication process"
 }

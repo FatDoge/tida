@@ -112,5 +112,7 @@
   "task_priority_distribution": "按优先级分布",
   "tasks_in_category": "{count} 个任务",
   "no_new_notifications": "没有新的通知",
-  "color": "颜色"
+  "color": "颜色",
+  "processing_login": "正在处理登录...",
+  "completing_authentication": "请稍候，正在完成认证过程"
 }
