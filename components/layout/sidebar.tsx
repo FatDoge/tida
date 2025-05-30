@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, CheckSquare, Tag, Settings, X, Triangle } from 'lucide-react';
+import { LayoutDashboard, CheckSquare, Tag, Settings, X, Triangle, Trophy } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -39,6 +39,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       href: '/tasks',
       icon: <CheckSquare className="h-5 w-5" />,
       translationKey: 'tasks',
+    },
+    {
+      title: 'Achievements',
+      href: '/achievements',
+      icon: <Trophy className="h-5 w-5" />,
+      translationKey: 'achievements',
     },
     {
       title: 'Categories',
