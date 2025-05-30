@@ -17,6 +17,7 @@ import {
 import { useAuth } from '@/providers/auth-provider';
 import { useI18n } from '@/providers/i18n-provider';
 import { User as SupabaseUser } from '@supabase/supabase-js';
+import { Badge } from '../ui/badge';
 
 interface HeaderProps {
   onMenuClick: () => void;
@@ -83,12 +84,24 @@ export default function Header({ onMenuClick, user }: HeaderProps) {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
-              <Avatar className="h-8 w-8">
-                <AvatarImage src={user?.user_metadata?.avatar_url || ''} />
-                <AvatarFallback>
-                  {user?.user_metadata?.full_name?.charAt(0).toUpperCase() || 'U'}
-                </AvatarFallback>
-              </Avatar>
+              <div className="relative">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage src={user?.user_metadata?.avatar_url || ''} />
+                  <AvatarFallback>
+                    {user?.user_metadata?.full_name?.charAt(0).toUpperCase() || 'U'}
+                  </AvatarFallback>
+                </Avatar>
+                {user && user.role === 'authenticated' && (
+                  <div className="absolute -bottom-2 -right-2">
+                    <Badge 
+                      variant="default"
+                      className="h-3 text-[8px] px-1 py-0"
+                    >
+                      Pro
+                    </Badge>
+                  </div>
+                )}
+              </div>
               <span className="sr-only">User menu</span>
             </Button>
           </DropdownMenuTrigger>

@@ -68,7 +68,7 @@ export default function TaskFilter({
     { value: 'dueDate', label: t('sort_by_due_date') },
     { value: 'priority', label: t('sort_by_priority') },
     { value: 'createdAt', label: t('sort_by_created_at') },
-    { value: 'title', label: 'Title' },
+    { value: 'title', label: t('title') },
   ];
   
   // Handle resetting all filters
