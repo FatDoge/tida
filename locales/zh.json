@@ -114,5 +114,12 @@
   "no_new_notifications": "没有新的通知",
   "color": "颜色",
   "processing_login": "正在处理登录...",
-  "completing_authentication": "请稍候，正在完成认证过程"
+  "completing_authentication": "请稍候，正在完成认证过程",
+  "confirm_password": "确认密码",
+  "please_enter_valid_email": "请输入有效的电子邮箱地址",
+  "password_min_length": "密码长度至少为6个字符",
+  "passwords_do_not_match": "两次输入的密码不匹配",
+  "check_email_for_confirmation": "请查看您的邮箱获取确认链接",
+  "loading": "加载中...",
+  "login_success": "You have successfully logged in"
 }

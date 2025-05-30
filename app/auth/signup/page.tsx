@@ -22,25 +22,25 @@ import { Input } from '@/components/ui/input';
 import { useAuth } from '@/providers/auth-provider';
 import { useI18n } from '@/providers/i18n-provider';
 
-const signupSchema = z.object({
-  email: z.string().email({
-    message: 'Please enter a valid email address',
-  }),
-  password: z.string().min(6, {
-    message: 'Password must be at least 6 characters',
-  }),
-  confirmPassword: z.string(),
-}).refine(data => data.password === data.confirmPassword, {
-  message: 'Passwords do not match',
-  path: ['confirmPassword'],
-});
-
 export default function SignupPage() {
   const { t } = useI18n();
   const { signUp, signInWithProvider } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  const signupSchema = z.object({
+    email: z.string().email({
+      message: t('please_enter_valid_email'),
+    }),
+    password: z.string().min(6, {
+      message: t('password_min_length'),
+    }),
+    confirmPassword: z.string(),
+  }).refine(data => data.password === data.confirmPassword, {
+    message: t('passwords_do_not_match'),
+    path: ['confirmPassword'],
+  });
   
   const form = useForm<z.infer<typeof signupSchema>>({
     resolver: zodResolver(signupSchema),
@@ -54,6 +54,7 @@ export default function SignupPage() {
   async function onSubmit(values: z.infer<typeof signupSchema>) {
     setIsLoading(true);
     
+    // 在onSubmit函数中修改成功消息
     try {
       const { error } = await signUp(values.email, values.password);
       
@@ -68,7 +69,7 @@ export default function SignupPage() {
       
       toast({
         title: t('success'),
-        description: 'Please check your email for a confirmation link',
+        description: t('check_email_for_confirmation'),
       });
       
       router.push('/auth/login');
@@ -153,7 +154,7 @@ export default function SignupPage() {
                     />
                   </FormControl>
                   <FormDescription>
-                    Password must be at least 6 characters
+                    {t('password_min_length')}
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -164,7 +165,7 @@ export default function SignupPage() {
               name="confirmPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Confirm Password</FormLabel>
+                  <FormLabel>{t('confirm_password')}</FormLabel>
                   <FormControl>
                     <Input 
                       placeholder="••••••" 
@@ -178,7 +179,7 @@ export default function SignupPage() {
               )}
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Loading...' : t('sign_up')}
+              {isLoading ? t('loading') : t('sign_up')}
             </Button>
           </form>
         </Form>

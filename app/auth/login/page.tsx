@@ -21,21 +21,21 @@ import { Input } from '@/components/ui/input';
 import { useAuth } from '@/providers/auth-provider';
 import { useI18n } from '@/providers/i18n-provider';
 
-const loginSchema = z.object({
-  email: z.string().email({
-    message: 'Please enter a valid email address',
-  }),
-  password: z.string().min(6, {
-    message: 'Password must be at least 6 characters',
-  }),
-});
-
 export default function LoginPage() {
   const { t } = useI18n();
   const { signIn, signInWithProvider } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+
+  const loginSchema = z.object({
+    email: z.string().email({
+      message: t('please_enter_valid_email'),
+    }),
+    password: z.string().min(6, {
+      message: t('password_min_length'),
+    }),
+  });
   
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -48,6 +48,7 @@ export default function LoginPage() {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setIsLoading(true);
     
+    // 在onSubmit函数中修改成功消息
     try {
       const { error } = await signIn(values.email, values.password);
       
@@ -62,7 +63,7 @@ export default function LoginPage() {
       
       toast({
         title: t('success'),
-        description: 'You have successfully logged in',
+        description: t('login_success'),
       });
       
       router.push('/');
@@ -159,7 +160,7 @@ export default function LoginPage() {
               )}
             />
             <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? 'Loading...' : t('sign_in')}
+              {isLoading ? t('loading') : t('sign_in')}
             </Button>
           </form>
         </Form>

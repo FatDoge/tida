@@ -114,5 +114,12 @@
   "no_new_notifications": "No new notifications",
   "color": "Color",
   "processing_login": "Processing login...",
-  "completing_authentication": "Please wait while we complete the authentication process"
+  "completing_authentication": "Please wait while we complete the authentication process",
+  "confirm_password": "Confirm Password",
+  "please_enter_valid_email": "Please enter a valid email address",
+  "password_min_length": "Password must be at least 6 characters",
+  "passwords_do_not_match": "Passwords do not match",
+  "check_email_for_confirmation": "Please check your email for a confirmation link",
+  "loading": "Loading...",
+  "login_success": "登录成功"
 }
