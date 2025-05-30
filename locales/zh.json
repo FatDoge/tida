@@ -121,5 +121,5 @@
   "passwords_do_not_match": "两次输入的密码不匹配",
   "check_email_for_confirmation": "请查看您的邮箱获取确认链接",
   "loading": "加载中...",
-  "login_success": "You have successfully logged in"
+  "login_success": "登录成功"
 }

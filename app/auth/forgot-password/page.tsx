@@ -20,6 +20,7 @@ import { Input } from '@/components/ui/input';
 import { useAuth } from '@/providers/auth-provider';
 import { useI18n } from '@/providers/i18n-provider';
 import { Triangle } from 'lucide-react';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const forgotPasswordSchema = z.object({
   email: z.string().email({
@@ -28,7 +29,7 @@ const forgotPasswordSchema = z.object({
 });
 
 export default function ForgotPasswordPage() {
-  const { t } = useI18n();
+  const { t, isLoaded } = useI18n();
   const { resetPassword } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
@@ -73,8 +74,27 @@ export default function ForgotPasswordPage() {
     }
   }
   
+  // 添加加载状态的骨架屏
+  if (!isLoaded) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12 animate-fade-in">
+        <div className="mx-auto w-full max-w-md space-y-6">
+          <div className="flex flex-col items-center space-y-2 text-center">
+            <Skeleton className="h-12 w-12 rounded-full" />
+            <Skeleton className="h-8 w-32" />
+            <Skeleton className="h-4 w-48" />
+          </div>
+          <div className="space-y-4">
+            <Skeleton className="h-10 w-full" />
+            <Skeleton className="h-10 w-full" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 py-12 animate-fade-in">
       <div className="mx-auto w-full max-w-md space-y-6">
         <div className="flex flex-col items-center space-y-2 text-center">
           <Triangle className="h-12 w-12 text-primary" />

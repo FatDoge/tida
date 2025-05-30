@@ -121,5 +121,5 @@
   "passwords_do_not_match": "Passwords do not match",
   "check_email_for_confirmation": "Please check your email for a confirmation link",
   "loading": "Loading...",
-  "login_success": "登录成功"
+  "login_success": "You have successfully logged in"
 }
