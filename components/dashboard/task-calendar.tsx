@@ -41,6 +41,7 @@ export function TaskCalendar({ tasks, title, description }: TaskCalendarProps) {
       toast({
         title: t('success'),
         description: t('task_updated'),
+        variant: 'success',
       });
     } catch (error) {
       toast({

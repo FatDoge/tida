@@ -81,6 +81,7 @@ export default function CategoryDialog({ open, onOpenChange, category }: Categor
         toast({
           title: t('success'),
           description: t('category_updated'),
+          variant:'success',
         });
       } else {
         // Create new category
@@ -92,6 +93,7 @@ export default function CategoryDialog({ open, onOpenChange, category }: Categor
         toast({
           title: t('success'),
           description: t('category_created'),
+          variant:'success',
         });
       }
       

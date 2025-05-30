@@ -65,6 +65,7 @@ export default function LoginPage() {
       toast({
         title: t('success'),
         description: t('login_success'),
+        variant: 'success',
       });
       
       router.push('/');

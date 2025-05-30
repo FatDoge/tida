@@ -57,6 +57,7 @@ export default function CategoryList() {
       toast({
         title: t('success'),
         description: t('category_deleted'),
+        variant: 'success',
       });
     } catch (error) {
       toast({

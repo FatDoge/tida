@@ -42,6 +42,7 @@ export default function SettingsForm() {
       toast({
         title: t('success'),
         description: t('profile_updated_successfully'),
+        variant:'success',
       });
     } catch (error) {
       console.error('Error updating profile:', error);

@@ -60,6 +60,7 @@ export default function ForgotPasswordPage() {
       toast({
         title: t('success'),
         description: '重置密码链接已发送到您的邮箱，请查收',
+        variant: 'success',
       });
       
       router.push('/auth/login');

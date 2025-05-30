@@ -120,7 +120,7 @@ export default function Dashboard() {
 
       
       {/* 任务贡献日历和最近任务并排显示 */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-1 lg:grid-cols-3">
       <TaskCalendar 
           tasks={tasks}
           title={t('task_calendar')}

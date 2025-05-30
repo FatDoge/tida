@@ -34,6 +34,7 @@ export function RecentTasks({
       toast({
         title: t('success'),
         description: t('task_updated'),
+        variant: 'success',
       });
     } catch (error) {
       toast({

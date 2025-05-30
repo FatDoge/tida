@@ -47,6 +47,7 @@ export default function TaskCard({ task, categories, onEdit }: TaskCardProps) {
       toast({
         title: t('success'),
         description: t('task_updated'),
+        variant:'success',
       });
     } catch (error) {
       toast({
@@ -64,6 +65,7 @@ export default function TaskCard({ task, categories, onEdit }: TaskCardProps) {
       toast({
         title: t('success'),
         description: t('task_deleted'),
+        variant:'success',
       });
     } catch (error) {
       toast({

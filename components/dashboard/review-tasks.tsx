@@ -39,6 +39,7 @@ export function ReviewTasks({
       toast({
         title: t('success'),
         description: t('task_updated'),
+        variant:'success',
       });
     } catch (error) {
       toast({

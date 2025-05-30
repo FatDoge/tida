@@ -115,6 +115,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
         toast({
           title: t('success'),
           description: t('task_updated'),
+          variant:'success',
         });
       } else {
         await createTask({
@@ -128,6 +129,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
         toast({
           title: t('success'),
           description: t('task_created'),
+          variant:'success',
         });
       }
       onClose();

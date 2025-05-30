@@ -71,6 +71,7 @@ export default function SignupPage() {
       toast({
         title: t('success'),
         description: t('check_email_for_confirmation'),
+        variant: 'success',
       });
       
       router.push('/auth/login');
