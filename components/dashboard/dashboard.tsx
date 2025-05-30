@@ -23,6 +23,7 @@ import { TaskContributionCalendar } from './task-contribution-calendar';
 import { StatusDistributionChart } from './status-distribution-chart';
 import { RecentTasks } from './recent-tasks';
 import { ReviewTasks } from './review-tasks';
+import { TaskCalendar } from './task-calendar';
 
 export default function Dashboard() {
   const { t } = useI18n();
@@ -74,6 +75,11 @@ export default function Dashboard() {
           <Plus className="mr-2 h-4 w-4" /> {t('add_task')}
         </Button>
       </div>
+
+      <TaskContributionCalendar 
+          tasks={tasks}
+          title={t('task_contribution')}
+        />
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
@@ -110,14 +116,16 @@ export default function Dashboard() {
         />
       </div>
 
-      {/* 贡献图 */}
-      <TaskContributionCalendar 
-        tasks={tasks}
-        title={t('task_contribution')}
-      />
+
+
       
       {/* 任务贡献日历和最近任务并排显示 */}
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-3">
+      <TaskCalendar 
+          tasks={tasks}
+          title={t('task_calendar')}
+          description={t('task_calendar_description')}
+        />
         <RecentTasks
           recentTasks={recentTasks}
           title={t('recent_tasks')}

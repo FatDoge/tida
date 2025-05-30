@@ -156,5 +156,17 @@
   "last_90_days": "Last 90 days",
   "last_180_days": "Last 180 days",
   "showing_tasks_for_last": "Showing tasks for last",
-  "days": "Days"
+  "days": "Days",
+  "task_calendar": "Task Calendar",
+  "task_calendar_description": "View your upcoming tasks by date",
+  "upcoming_tasks": "Upcoming Tasks",
+  "no_upcoming_tasks": "No upcoming tasks in the next 7 days",
+  "sun": "Sun",
+  "mon": "Mon",
+  "tue": "Tue",
+  "wed": "Wed",
+  "thu": "Thu",
+  "fri": "Fri",
+  "sat": "Sat",
+  "task": "task"
 }

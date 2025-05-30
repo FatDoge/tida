@@ -157,5 +157,17 @@
   "last_90_days": "最近90天",
   "last_180_days": "最近180天",
   "showing_tasks_for_last": "显示最近",
-  "days": "天的任务"
+  "days": "天的任务",
+  "task_calendar": "任务日历",
+  "task_calendar_description": "按日期查看即将到来的任务",
+  "upcoming_tasks": "即将到来的任务",
+  "no_upcoming_tasks": "未来7天没有任务",
+  "sun": "日",
+  "mon": "一",
+  "tue": "二",
+  "wed": "三",
+  "thu": "四",
+  "fri": "五",
+  "sat": "六",
+  "task": "任务"
 }
