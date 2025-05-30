@@ -13,6 +13,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Tida - Elegant Task Management',
   description: 'A sophisticated task management application with advanced features',
+  icons: {
+    icon: '/favicon.ico',
+  },
 };
 
 export default function RootLayout({
