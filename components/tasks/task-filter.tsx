@@ -64,7 +64,7 @@ export default function TaskFilter({
   
   // Sort options
   const sortOptions = [
-    { value: 'order', label: 'Default' },
+    { value: 'order', label: t('default') },
     { value: 'dueDate', label: t('sort_by_due_date') },
     { value: 'priority', label: t('sort_by_priority') },
     { value: 'createdAt', label: t('sort_by_created_at') },

@@ -24,6 +24,7 @@
   "delete_task": "删除任务",
   "delete_category": "删除类别",
   "title": "标题",
+  "default": "默认",
   "description": "描述",
   "status": "状态",
   "priority": "优先级",

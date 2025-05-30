@@ -24,6 +24,7 @@
   "delete_task": "Delete Task",
   "delete_category": "Delete Category",
   "title": "Title",
+  "default": "Default",
   "description": "Description",
   "status": "Status",
   "priority": "Priority",
