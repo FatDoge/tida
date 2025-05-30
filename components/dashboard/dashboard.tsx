@@ -1,28 +1,28 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { 
   CheckCircle, 
   Clock, 
   AlertTriangle,
   Plus, 
-  BarChart4, 
-  Calendar,
-  CheckCircle2,
-  Circle, 
-  Clock3
+  BarChart4
 } from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
 import { useI18n } from '@/providers/i18n-provider';
 import { useTasks } from '@/providers/tasks-provider';
 import { useAuth } from '@/providers/auth-provider';
 import { isOverdue, isDueToday, cn } from '@/lib/utils';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import TaskDialog from '@/components/tasks/task-dialog';
 import { Task } from '@/types/task';
-import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from 'recharts';
+
+// 导入组件
+import { TaskContributionCalendar } from './task-contribution-calendar';
+import { StatusDistributionChart } from './status-distribution-chart';
+import { RecentTasks } from './recent-tasks';
+import { ReviewTasks } from './review-tasks';
 
 export default function Dashboard() {
   const { t } = useI18n();
@@ -44,7 +44,6 @@ export default function Dashboard() {
     : 0;
   
   // Prepare data for pie chart
-  // 修改statusData的定义，使用直接的颜色值
   const statusData = [
     { name: t('pending'), value: pendingTasks, color: '#3B82F6' }, // 蓝色
     { name: t('in_progress'), value: inProgressTasks, color: '#10B981' }, // 绿色
@@ -110,141 +109,48 @@ export default function Dashboard() {
           href="/tasks"
         />
       </div>
-      
-      <div className="grid gap-6 md:grid-cols-2">
-        <Card className="overflow-hidden">
-          <CardHeader>
-            <CardTitle>{t('task_distribution')}</CardTitle>
-            <CardDescription>{t('task_status_distribution')}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {statusData.length > 0 ? (
-              <div className="h-[220px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={statusData}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                      labelLine={true}
-                    >
-                      {statusData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      formatter={(value: number) => [`${value} tasks`, 'Count']}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-[220px]">
-                <p className="text-muted-foreground">{t('no_tasks')}</p>
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button variant="ghost" asChild>
-              <Link href="/tasks">{t('view_all_tasks')}</Link>
-            </Button>
-          </CardFooter>
-        </Card>
-        
-        {/* 新增：按优先级分布的饼图 */}
-        <Card className="overflow-hidden">
-          <CardHeader>
-            <CardTitle>{t('task_priority_distribution')}</CardTitle>
-            <CardDescription>{t('task_priority_distribution')}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {priorityData.length > 0 ? (
-              <div className="h-[220px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={priorityData}
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={70}
-                      fill="#8884d8"
-                      dataKey="value"
-                      label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                      labelLine={true}
-                    >
-                      {priorityData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip 
-                      formatter={(value: number) => [`${value} tasks`, 'Count']}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-[220px]">
-                <p className="text-muted-foreground">{t('no_tasks')}</p>
-              </div>
-            )}
-          </CardContent>
-          <CardFooter>
-            <Button variant="ghost" asChild>
-              <Link href="/tasks">{t('view_all_tasks')}</Link>
-            </Button>
-          </CardFooter>
-        </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>{t('recent_tasks')}</CardTitle>
-            <CardDescription>{t('your_recent_tasks')}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {recentTasks.length > 0 ? (
-                recentTasks.map((task) => (
-                  <div
-                    key={task.id}
-                    className="flex items-center justify-between rounded-lg border p-3 text-sm transition-colors hover:bg-muted/50"
-                  >
-                    <div className="flex items-center gap-3">
-                      {task.status === 'completed' ? (
-                        <CheckCircle2 className="h-5 w-5 text-primary" />
-                      ) : task.status === 'in_progress' ? (
-                        <Clock3 className="h-5 w-5 text-blue-500" />
-                      ) : (
-                        <Circle className="h-5 w-5 text-muted-foreground" />
-                      )}
-                      <span className={task.status === 'completed' ? 'line-through text-muted-foreground' : ''}>
-                        {task.title}
-                      </span>
-                    </div>
-                    {task.dueDate && (
-                      <div className="flex items-center text-xs text-muted-foreground">
-                        <Calendar className="mr-1 h-3 w-3" />
-                        <span>{new Date(task.dueDate).toLocaleDateString()}</span>
-                      </div>
-                    )}
-                  </div>
-                ))
-              ) : (
-                <div className="flex flex-col items-center justify-center py-6">
-                  <p className="text-muted-foreground">{t('no_tasks')}</p>
-                </div>
-              )}
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button variant="ghost" asChild>
-              <Link href="/tasks">{t('view_all_tasks')}</Link>
-            </Button>
-          </CardFooter>
-        </Card>
+      {/* 贡献图 */}
+      <TaskContributionCalendar 
+        tasks={tasks}
+        title={t('task_contribution')}
+      />
+      
+      {/* 任务贡献日历和最近任务并排显示 */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <RecentTasks
+          recentTasks={recentTasks}
+          title={t('recent_tasks')}
+          description={t('your_recent_tasks')}
+          noTasksMessage={t('no_tasks')}
+          viewAllLabel={t('view_all_tasks')}
+        />
+        <ReviewTasks
+          tasks={tasks}
+          title={t('review_tasks')}
+          description={t('overdue_tasks_today')}
+          noTasksMessage={t('no_overdue_tasks')}
+          viewAllLabel={t('view_all_tasks')}
+        />
+      </div>
+      
+      {/* 将两个饼图放到下方 */}
+      <div className="grid gap-6 md:grid-cols-2">
+        <StatusDistributionChart
+          statusData={statusData}
+          title={t('task_distribution')}
+          description={t('task_status_distribution')}
+          noTasksMessage={t('no_tasks')}
+          viewAllLabel={t('view_all_tasks')}
+        />
+        
+        <StatusDistributionChart
+          statusData={priorityData}
+          title={t('task_priority_distribution')}
+          description={t('task_priority_distribution')}
+          noTasksMessage={t('no_tasks')}
+          viewAllLabel={t('view_all_tasks')}
+        />
       </div>
       
       <TaskDialog 
