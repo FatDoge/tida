@@ -149,8 +149,8 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
           <DialogTitle>{task ? t('edit_task') : t('add_task')}</DialogTitle>
           <DialogDescription>
             {task
-              ? 'Update the details of your task below.'
-              : 'Fill in the details of your new task below.'}
+              ? t('update_task_description')
+              : t('create_task_description')}
           </DialogDescription>
         </DialogHeader>
         
@@ -163,7 +163,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                 <FormItem>
                   <FormLabel>{t('title')}</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Task title" autoFocus />
+                    <Input {...field} placeholder={t('task_title_placeholder')} autoFocus />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -179,7 +179,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                   <FormControl>
                     <Textarea
                       {...field}
-                      placeholder="Task description"
+                      placeholder={t('task_description_placeholder')}
                       className="min-h-24 resize-none"
                       value={field.value || ''}
                     />
@@ -202,7 +202,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select status" />
+                          <SelectValue placeholder={t('select_status_placeholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -228,7 +228,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select priority" />
+                          <SelectValue placeholder={t('select_priority_placeholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
@@ -256,11 +256,11 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                     >
                       <FormControl>
                         <SelectTrigger>
-                          <SelectValue placeholder="Select category" />
+                          <SelectValue placeholder={t('select_category_placeholder')} />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="none">None</SelectItem>
+                        <SelectItem value="none">{t('none')}</SelectItem>
                         {categories.map((category) => (
                           <SelectItem key={category.id} value={category.id}>
                             <div className="flex items-center">
@@ -299,7 +299,7 @@ export default function TaskDialog({ open, onOpenChange, task, onClose }: TaskDi
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              <span>Pick a date</span>
+                              <span>{t('pick_a_date')}</span>
                             )}
                           </Button>
                         </FormControl>

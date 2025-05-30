@@ -121,5 +121,19 @@
   "passwords_do_not_match": "两次输入的密码不匹配",
   "check_email_for_confirmation": "请查看您的邮箱获取确认链接",
   "loading": "加载中...",
-  "login_success": "登录成功"
+  "login_success": "登录成功",
+  "none": "无",
+  "update_task_description": "在下方更新您的任务详情。",
+  "create_task_description": "在下方填写您的新任务详情。",
+  "pick_a_date": "选择日期",
+  "task_title_placeholder": "任务标题",
+  "task_description_placeholder": "任务描述",
+  "select_status_placeholder": "选择状态",
+  "select_priority_placeholder": "选择优先级",
+  "select_category_placeholder": "选择类别",
+  "update_category_description": "在下方更新您的类别详情。",
+  "create_category_description": "创建一个新类别来组织您的任务。",
+  "category_name_placeholder": "类别名称",
+  "name_required": "名称是必填项",
+  "color_required": "颜色是必填项"
 }

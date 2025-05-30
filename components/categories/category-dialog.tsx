@@ -34,17 +34,17 @@ interface CategoryDialogProps {
   category: Category | null;
 }
 
-const categorySchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  color: z.string().min(1, { message: 'Color is required' }),
-});
-
-type CategoryFormValues = z.infer<typeof categorySchema>;
-
 export default function CategoryDialog({ open, onOpenChange, category }: CategoryDialogProps) {
   const { t } = useI18n();
   const { createCategory, updateCategory } = useTasks();
   const { toast } = useToast();
+  
+  const categorySchema = z.object({
+    name: z.string().min(1, { message: t('name_required') }),
+    color: z.string().min(1, { message: t('color_required') }),
+  });
+  
+  type CategoryFormValues = z.infer<typeof categorySchema>;
   
   const form = useForm<CategoryFormValues>({
     resolver: zodResolver(categorySchema),
@@ -114,8 +114,8 @@ export default function CategoryDialog({ open, onOpenChange, category }: Categor
           </DialogTitle>
           <DialogDescription>
             {category
-              ? 'Update your category details below.'
-              : 'Create a new category to organize your tasks.'}
+              ? t('update_category_description')
+              : t('create_category_description')}
           </DialogDescription>
         </DialogHeader>
         
@@ -128,7 +128,7 @@ export default function CategoryDialog({ open, onOpenChange, category }: Categor
                 <FormItem>
                   <FormLabel>{t('name')}</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Category name" />
+                    <Input {...field} placeholder={t('category_name_placeholder')} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

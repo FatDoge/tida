@@ -121,5 +121,19 @@
   "passwords_do_not_match": "Passwords do not match",
   "check_email_for_confirmation": "Please check your email for a confirmation link",
   "loading": "Loading...",
-  "login_success": "You have successfully logged in"
+  "login_success": "You have successfully logged in",
+  "none": "None",
+  "update_task_description": "Update the details of your task below.",
+  "create_task_description": "Fill in the details of your new task below.",
+  "pick_a_date": "Pick a date",
+  "task_title_placeholder": "Task title",
+  "task_description_placeholder": "Task description",
+  "select_status_placeholder": "Select status",
+  "select_priority_placeholder": "Select priority",
+  "select_category_placeholder": "Select category",
+  "update_category_description": "Update your category details below.",
+  "create_category_description": "Create a new category to organize your tasks.",
+  "category_name_placeholder": "Category name",
+  "name_required": "Name is required",
+  "color_required": "Color is required"
 }
