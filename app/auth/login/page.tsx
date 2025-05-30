@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { useAuth } from '@/providers/auth-provider';
 import { useI18n } from '@/providers/i18n-provider';
 import { Skeleton } from '@/components/ui/skeleton';
+import { GoogleIcon } from '@/components/icons/google';
 
 export default function LoginPage() {
   const { t, isLoaded } = useI18n();
@@ -207,6 +208,15 @@ export default function LoginPage() {
           >
             <Github className="mr-2 h-4 w-4" />
             GitHub
+          </Button>
+          <Button
+            variant="outline"
+            className="w-full"
+            onClick={() => handleProviderSignIn('google')}
+            disabled={isLoading}
+          >
+            <GoogleIcon className="mr-2 h-4 w-4" />
+            Google
           </Button>
         </div>
         
