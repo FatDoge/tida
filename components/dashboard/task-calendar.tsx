@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { format, addDays, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday, isTomorrow } from 'date-fns';
+import { format, addDays, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, isToday, isTomorrow, startOfWeek, endOfWeek } from 'date-fns';
 import { Calendar as CalendarIcon, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -24,10 +24,12 @@ export function TaskCalendar({ tasks, title, description }: TaskCalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   
-  // 获取当前月份的所有日期
+  // 获取当前月份的所有日期，并包含前后月份的日期以填充完整的日历网格
   const monthStart = startOfMonth(currentDate);
   const monthEnd = endOfMonth(currentDate);
-  const monthDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
+  const calendarStart = startOfWeek(monthStart);
+  const calendarEnd = endOfWeek(monthEnd);
+  const calendarDays = eachDayOfInterval({ start: calendarStart, end: calendarEnd });
   
   // 获取未来7天的日期范围
   const today = new Date();
@@ -155,7 +157,7 @@ export function TaskCalendar({ tasks, title, description }: TaskCalendarProps) {
         
         {/* 日历主体 */}
         <div className="grid grid-cols-7 gap-1 text-center">
-          {monthDays.map((day, i) => {
+          {calendarDays.map((day, i) => {
             const taskCount = getTaskCountForDay(day);
             return (
               <div 
