@@ -195,5 +195,12 @@
   "tasks_created": "Tasks Created",
   "tasks_completed_on_time": "Tasks Completed On Time",
   "overdue_tasks_managed": "Overdue Tasks Managed",
-  "next": "Next"
+  "next": "Next",
+  "please_login_to_save_changes": "Please login to save changes",
+  "logout_success": "You have successfully logged out",
+  "logging_out": "Logging out...",
+  "login_required": "Login required",
+  "login_to_continue": "Please login to continue",
+  "session_expired": "Your session has expired",
+  "please_login_again": "Please login again"
 }

@@ -30,7 +30,15 @@ export default function SettingsForm() {
   const [mounted, setMounted] = useState(false);
   
   const handleUpdateProfile = async () => {
-    if (!user) return;
+    if (!user) {
+      // 添加未登录时的提示
+      toast({
+        title: t('error_occurred'),
+        description: t('please_login_to_save_changes'),
+        variant: 'destructive',
+      });
+      return;
+    }
     
     setIsLoading(true);
     
@@ -72,7 +80,7 @@ export default function SettingsForm() {
       
       <Separator />
       
-      <Card>
+      {user ? <Card>
         <CardHeader>
           <CardTitle>{t('profile')}</CardTitle>
           <CardDescription>
@@ -99,7 +107,7 @@ export default function SettingsForm() {
             />
           </div>
         </CardContent>
-      </Card>
+      </Card> : null}
       
       <Card>
         <CardHeader>
@@ -147,11 +155,14 @@ export default function SettingsForm() {
         </CardContent>
       </Card>
       
-      <div className="flex justify-end">
-        <Button onClick={handleUpdateProfile} disabled={isLoading}>
+      {user ? <div className="flex justify-end">
+        <Button 
+          onClick={handleUpdateProfile} 
+          disabled={isLoading}
+        >
           {isLoading ? t('saving') : t('save_changes')}
         </Button>
-      </div>
+      </div> : null}
     </div>
   );
 }

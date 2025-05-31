@@ -196,5 +196,12 @@
   "tasks_created": "已创建任务",
   "tasks_completed_on_time": "按时完成任务",
   "overdue_tasks_managed": "已管理逾期任务",
-  "next": "下一个"
+  "next": "下一个",
+  "please_login_to_save_changes": "请登录后保存更改",
+  "logout_success": "您已成功退出登录",
+  "logging_out": "正在退出登录...",
+  "login_required": "需要登录",
+  "login_to_continue": "请登录后继续",
+  "session_expired": "您的会话已过期",
+  "please_login_again": "请重新登录"
 }
