@@ -173,7 +173,7 @@ export function TaskCalendar({ tasks, title, description }: TaskCalendarProps) {
   return (
     <Card>
       <CardHeader>
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-wrap justify-between">
           <div>
             <CardTitle>{title}</CardTitle>
             <CardDescription>{description}</CardDescription>
