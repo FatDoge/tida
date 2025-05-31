@@ -6,6 +6,7 @@ import { Task } from '@/types/task';
 import { useI18n } from '@/providers/i18n-provider';
 import { cn } from '@/lib/utils';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface TaskContributionCalendarProps {
   tasks: Task[];
@@ -150,25 +151,49 @@ export function TaskContributionCalendar({ tasks, title }: TaskContributionCalen
             }}
           >
             {calendarData.map((day) => (
-              <div 
-                key={day.date} 
-                className={cn(
-                  "w-5 h-5 rounded-sm flex flex-col items-center justify-center text-xs",
-                  getLevelColorClass(day.level, day.isInSelectedRange)
-                )}
-                title={`${day.date}: ${day.count} ${t('tasks')}`}
-                data-date={day.date}
-                data-count={day.count}
-              >
-                <span className="text-[6px] leading-none text-muted-foreground">
-                  {getMonthAndDay(day.date).split('/')[1]}
-                </span>
-                {day.count > 0 && day.isInSelectedRange && (
-                  <span className="text-[7px] leading-none font-medium">
-                    {day.count}
+              day.isInSelectedRange ? (
+                <TooltipProvider key={day.date}>
+                  <Tooltip delayDuration={300}>
+                    <TooltipTrigger asChild>
+                      <div 
+                        className={cn(
+                          "w-5 h-5 rounded-sm flex flex-col items-center justify-center text-xs cursor-pointer",
+                          getLevelColorClass(day.level, day.isInSelectedRange)
+                        )}
+                        data-date={day.date}
+                        data-count={day.count}
+                      >
+                        <span className="text-[6px] leading-none text-muted-foreground">
+                          {getMonthAndDay(day.date).split('/')[1]}
+                        </span>
+                        {day.count > 0 && (
+                          <span className="text-[7px] leading-none font-medium">
+                            {day.count}
+                          </span>
+                        )}
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent side="top" className="text-xs p-2">
+                      <p className="font-medium">{day.date}</p>
+                      <p>{day.count} {t('tasks')}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              ) : (
+                <div 
+                  key={day.date}
+                  className={cn(
+                    "w-5 h-5 rounded-sm flex flex-col items-center justify-center text-xs cursor-default",
+                    getLevelColorClass(day.level, day.isInSelectedRange)
+                  )}
+                  data-date={day.date}
+                  data-count={day.count}
+                >
+                  <span className="text-[6px] leading-none text-muted-foreground">
+                    {getMonthAndDay(day.date).split('/')[1]}
                   </span>
-                )}
-              </div>
+                </div>
+              )
             ))}
           </div>
         </div>
